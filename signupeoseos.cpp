@@ -8,7 +8,7 @@ void signupeoseos::transfer(account_name from, account_name to, asset quantity, 
     if (from == _self || to != _self) {
         return;
     }
-    eosio_assert(quantity.symbol == CORE_SYMBOL, "signupeoseos only accepts CORE for signup eos account");
+    eosio_assert(quantity.symbol == SYS_SYMBOL, "signupeoseos only accepts CORE for signup eos account");
     eosio_assert(quantity.is_valid(), "Invalid token transfer");
     eosio_assert(quantity.amount > 0, "Quantity must be positive");
 
@@ -48,8 +48,8 @@ void signupeoseos::transfer(account_name from, account_name to, asset quantity, 
     ripemd160(reinterpret_cast<char *>(pubkey_data.data()), 33, &check_pubkey);
     eosio_assert(memcmp(&check_pubkey.hash, &vch.end()[-4], 4) == 0, "invalid public key");
 
-    asset stake_net(1000, CORE_SYMBOL);
-    asset stake_cpu(1000, CORE_SYMBOL);
+    asset stake_net(1000, SYS_SYMBOL);
+    asset stake_cpu(1000, SYS_SYMBOL);
     asset buy_ram = quantity - stake_net - stake_cpu;
     eosio_assert(buy_ram.amount > 0, "Not enough balance to buy ram");
 

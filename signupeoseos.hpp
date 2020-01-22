@@ -12,6 +12,8 @@
 using namespace eosio;
 using namespace std;
 
+#define SYS_SYMBOL S(4, YAS)
+
 class signupeoseos: public contract {
 public:
     signupeoseos(account_name self): contract(self){};
